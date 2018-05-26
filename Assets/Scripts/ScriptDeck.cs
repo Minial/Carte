@@ -13,6 +13,7 @@ public class ScriptDeck : MonoBehaviour
     public Sprite SpriteAttaque;
     public Sprite SpriteEsquive;
     public Sprite SpriteSoin;
+    public Sprite SpritePrendre;
     SpriteRenderer CarteVisible;
     private bool Init = true;//si c'est le premier click sur le deck
     private GameObject TempCarte;//pour replacer la carte en dessous du paquet
