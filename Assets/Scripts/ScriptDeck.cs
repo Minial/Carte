@@ -65,25 +65,85 @@ public class ScriptDeck : MonoBehaviour
         string sgn = "N/A";
         for (int i = 1; i <= NbreCartes; i++)
         {
-            if (i<=NbreCartes*0.25)
+            if (i<=39)
             {
-                nb = i;
-                sgn = "Coeur";
+                if (i<=13)
+                {
+                    nb = i;
+                    sgn = "Coeur";
+                }
+                if(13 < i && i<= 26)
+                {
+                    nb = i-13;
+                    sgn = "Coeur";
+                }
+                if(26 < i && i<= 39)
+                {
+                    nb = i-26;
+                    sgn = "Coeur";
+                }
+                
             }
-            else if (i <= NbreCartes * 0.5)
+            else if (39 < i && i <= 78)
             {
-                nb = i - 13;
-                sgn = "Carreau";
+                if (i <= 52)
+                {
+                    nb = i-39;
+                    sgn = "Carreau";
+                }
+                if (52 < i && i <= 65)
+                {
+                    nb = i - 52;
+                    sgn = "Carreau";
+                }
+                if (65 < i && i <= 78)
+                {
+                    nb = i - 65;
+                    sgn = "Carreau";
+                }
             }
-            else if (i <= NbreCartes * 0.75)
+            else if (78 < i && i <= 117)
             {
-                nb = i - 26;
-                sgn = "Trèfle";
+                if(i <= 91)
+                {
+                    nb = i - 78;
+                    sgn = "Trèfle";
+                }
+                if (91 < i && i <= 104)
+                {
+                    nb = i - 91;
+                    sgn = "Trèfle";
+                }
+                if (104 < i && i <= 117)
+                {
+                    nb = i - 104;
+                    sgn = "Trèfle";
+                }
+
             }
             else
             {
-                nb = i - 39;
-                sgn = "Pique";
+                if(i <= 130)
+                {
+                    nb = i - 117;
+                    sgn = "Pique";
+                }
+                if(130 < i && i <= 143)
+                {
+                    nb = i - 130;
+                    sgn = "Pique";
+                }
+                if (143 < i && i <= 156)
+                {
+                    nb = i - 143;
+                    sgn = "Pique";
+                }
+                if (156 < i && i <= 159)
+                {
+                    nb = i - 156;
+                    sgn = "Pique";
+                }
+
             }
             cartes.Add(Instantiate(PrefabCarte, this.transform.position, this.transform.rotation));
             cartes[i - 1].GetComponent<ScriptCarte>().signe = sgn;
@@ -335,7 +395,7 @@ public class ScriptDeck : MonoBehaviour
             }
             cartes[i - 1].GetComponent<SpriteRenderer>().sortingLayerName = "Default";//pour éviter que la carte s'affiche devant le reste
             //cartes[i - 1].transform.localScale=new Vector3(0.5f,0.5f,1)//pour afficher a la bonne taille
-;        }
+        }
         Randomise();//on le met en deux fois pour que les signes ne corresponde pas aux cartes.
         this.transform.localScale = new Vector3(2.02222222f, 1.9841269f, 1);//pour afficher a la bonne taille au départ
     }
