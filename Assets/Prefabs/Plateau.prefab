@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212540300334849178}
   - component: {fileID: 114784507600895906}
   - component: {fileID: 61690729176198268}
+  - component: {fileID: 114516813743722566}
   m_Layer: 0
   m_Name: Plateau
   m_TagString: Untagged
@@ -67,6 +68,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.2, y: 12}
   m_EdgeRadius: 0
+--- !u!114 &114516813743722566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748285470680784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f9e39e63647c94ca79b7f8b8ba11d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NombreJoueur: 4
+  Port: 25000
+  TestPrebaf: {fileID: 0}
 --- !u!114 &114784507600895906
 MonoBehaviour:
   m_ObjectHideFlags: 1

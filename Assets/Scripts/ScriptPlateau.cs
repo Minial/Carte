@@ -22,10 +22,6 @@ public class ScriptPlateau : MonoBehaviour {
         ListeJoueur = new List<GameObject>();
         PrefabJoueur = GameObject.FindGameObjectWithTag("TagJoueur");
         PosJoueur=this.transform;
-        //ListeJoueur.Add(Instantiate(PrefabJoueur, new Vector3(4, 0, 0), PosJoueur.rotation));
-        //ListeJoueur.Add(Instantiate(PrefabJoueur, new Vector3(-4, 0, 0), PosJoueur.rotation));
-        //ListeJoueur.Add(Instantiate(PrefabJoueur, new Vector3(0, 3, 0), PosJoueur.rotation));
-        //ListeJoueur.Add(Instantiate(PrefabJoueur, new Vector3(0, -3, 0), PosJoueur.rotation));
         for (int i = 0; i < NombreJoueur; i++)
         {
             float Cos = 8f * Mathf.Cos(i*2f*Mathf.PI/NombreJoueur);
