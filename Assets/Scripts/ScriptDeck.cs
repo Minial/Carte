@@ -405,26 +405,7 @@ public class ScriptDeck : MonoBehaviour
     {
 
     }
-
-    /*void OnMouseUpAsButton()
-    {
-        if (Init == false)
-        {//avec init on affiche juste la première carte
-            TempCarte = cartes[NbreCartes - 1];
-            for (int i = NbreCartes - 1; i > 0; i--)
-            {
-                cartes[i] = cartes[i - 1];
-            }
-            cartes[0] = TempCarte;
-        }
-        else
-        {
-            Init = false;
-            this.transform.localScale = new Vector3(1,1,1);//pour afficher a la bonne taille
-        }
-        CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<ScriptCarte>().image;//juste l'affichage
-    }*/
-
+    
     public GameObject PrendreCarte()
     {
         TempCarte = cartes[NbreCartes - 1];

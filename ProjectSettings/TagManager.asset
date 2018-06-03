@@ -8,6 +8,15 @@ TagManager:
   - TagJoueur
   - TagCarte
   - TagJoueurNetwork
+  - TagJoueurN1
+  - TagJoueurN2
+  - TagJoueurN3
+  - TagJoueurN4
+  - TagJoueurN5
+  - TagJoueurN6
+  - TagJoueurN7
+  - TagJoueurN8
+  - TagJoueurN9
   layers:
   - Default
   - TransparentFX

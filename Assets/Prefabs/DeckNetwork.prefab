@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1167417684382742}
+  m_IsPrefabParent: 1
+--- !u!1 &1167417684382742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4135529940312680}
+  - component: {fileID: 212057545995196392}
+  - component: {fileID: 114320321440957614}
+  - component: {fileID: 61116817339484950}
+  - component: {fileID: 114029770214924772}
+  - component: {fileID: 114634962855662620}
+  m_Layer: 0
+  m_Name: DeckNetwork
+  m_TagString: TagDeck
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4135529940312680
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.68, y: -6.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61116817339484950
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.45, y: 0.63}
+    newSize: {x: 0.45, y: 0.63}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.45, y: 0.63}
+  m_EdgeRadius: 0
+--- !u!114 &114029770214924772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 236
+    i1: 147
+    i2: 33
+    i3: 233
+    i4: 119
+    i5: 63
+    i6: 204
+    i7: 52
+    i8: 73
+    i9: 66
+    i10: 33
+    i11: 164
+    i12: 128
+    i13: 94
+    i14: 54
+    i15: 179
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114320321440957614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b723e5419e501334cb8ff699cb9820bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NbreCartes: 159
+  SpriteAttaque: {fileID: 21300000, guid: a9f550eae983fad49b3bcf8183aa258c, type: 3}
+  SpriteAttaqueFurtive: {fileID: 21300000, guid: f92e63ebb24193e43bb612b54871e815,
+    type: 3}
+  SpriteAttaqueSang: {fileID: 21300000, guid: 48ba88793b933e345b7a58937bb149f2, type: 3}
+  SpriteEsquive: {fileID: 21300000, guid: 36aa90b23d1cf944881525c26f92e449, type: 3}
+  SpriteParchemin: {fileID: 21300000, guid: 07a36bc7785c0b54a871b171d0417a9c, type: 3}
+  SpriteSoin: {fileID: 21300000, guid: 2ed3de1ed7bff0d4bb51315eb5b81ad4, type: 3}
+  SpritePoison: {fileID: 21300000, guid: 3abe15eda65f77e4b89bd51fb87a29e6, type: 3}
+  SpritePrendre: {fileID: 21300000, guid: 94d4004dde566b648b17f677a1a43561, type: 3}
+  SpriteBrise: {fileID: 21300000, guid: 977d0e56233811e45bd0a8216ca69f21, type: 3}
+  SpriteMagasin: {fileID: 21300000, guid: abb5ddc119f776647a52be1414b4dff0, type: 3}
+  SpritePioche: {fileID: 21300000, guid: 386feabed4cf09c4dba7feb19c6703d8, type: 3}
+  SpriteDuel: {fileID: 21300000, guid: b811a019188b3cf419564eb2c6f2ea63, type: 3}
+  SpriteFlamme: {fileID: 21300000, guid: 113aa3c48e5dc0e4b96eeaa404826f33, type: 3}
+  Sprite1000Fleche: {fileID: 21300000, guid: fb37545826d41bd4291ee3c6ca5ae1e4, type: 3}
+  SpriteBombe: {fileID: 21300000, guid: 5489ee52032f51e4ba7d06f6558c59f6, type: 3}
+  SpriteRepos: {fileID: 21300000, guid: 66d3e7a2243b3414aa30f95e79a2c3a6, type: 3}
+  SpriteAntiMagie: {fileID: 21300000, guid: 78f7f6a2f02dea345a98fc44f7b0687a, type: 3}
+  SpriteControle: {fileID: 21300000, guid: 919b6ae2dd1af3945b13f00c415f1d28, type: 3}
+  SpritePrison: {fileID: 21300000, guid: 0165ddfb41813cf4a994a2483313a11d, type: 3}
+  SpriteBataille: {fileID: 21300000, guid: ab645d4585f77894f8186b4f52d58428, type: 3}
+  SpriteAlliee: {fileID: 21300000, guid: 0a483bb85e72cfe4cb6d04dbc6850b92, type: 3}
+  SpriteFamine: {fileID: 21300000, guid: 5e753f58c44bd8e4185f314f0d5861c9, type: 3}
+  SpriteProvocation: {fileID: 21300000, guid: dd958b4880e04924dbac162467ac81bb, type: 3}
+  SpriteEchange: {fileID: 21300000, guid: 43d5a182f1401a74aac143255c8dc590, type: 3}
+  SpriteBouclierEsquive: {fileID: 21300000, guid: 12c1ff65cce885f43a2384d45ce42795,
+    type: 3}
+  SpriteChevalOffenssif: {fileID: 21300000, guid: 5aef80c452941b74e974a4b8b8c8a4a7,
+    type: 3}
+  SpriteChevalDeffenssif: {fileID: 21300000, guid: 4f6581a724481be4694613083c36c746,
+    type: 3}
+  SpriteArmeInfinie: {fileID: 21300000, guid: 98ac4fe13ff46de41888fe49882f5563, type: 3}
+  SpriteArmeBriseCarte: {fileID: 21300000, guid: 1702b7fe1ed68c24cb9c51cdd17fec92,
+    type: 3}
+  SpriteArmeContreBouclier: {fileID: 21300000, guid: 016a740eef9177a41bd66d0bd22383f3,
+    type: 3}
+  SpriteArmeContreEsquive: {fileID: 21300000, guid: 5b948e4e9106fbc47ad477057184fa19,
+    type: 3}
+  SpriteArmePrendreCarte: {fileID: 21300000, guid: ffb74430a74970f4e915e1d4d3b21110,
+    type: 3}
+  SpriteArmeDegatSiEsquive: {fileID: 21300000, guid: 2448afb8b4adcbb4dad056e0a989a8e9,
+    type: 3}
+  SpriteArmeAttaqueZone: {fileID: 21300000, guid: 3d05291681719484095c428dde06f903,
+    type: 3}
+  SpriteArmeBriseCheval: {fileID: 21300000, guid: 76c2fcb7581c72243b162bc741fe9ac4,
+    type: 3}
+  SpriteBouclier2Degats: {fileID: 21300000, guid: ec9276d5c88df1f45b1c4e3d58765fcb,
+    type: 3}
+  SpriteBouclierZone: {fileID: 21300000, guid: 78d26eba286a6f0418aee57f2ec338fc, type: 3}
+  SpriteArmePoison: {fileID: 21300000, guid: 8462d0a45fc60024ea5106eff0bd52d6, type: 3}
+  SpriteBouclierSac: {fileID: 21300000, guid: 01649d497824e2443ad3e48bf9a96e41, type: 3}
+  SpriteArmeAttaqueSang: {fileID: 21300000, guid: 32cd923e7a2f2b443ad221464b12ddd8,
+    type: 3}
+--- !u!114 &114634962855662620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!212 &212057545995196392
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167417684382742}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1294437061
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300104, guid: 1d74508b00e14be4b880d2b041b18e34, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.45, y: 0.63}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
