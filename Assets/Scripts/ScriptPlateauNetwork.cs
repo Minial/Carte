@@ -8,22 +8,38 @@ public class ScriptPlateauNetwork : NetworkBehaviour
     private GameObject PrefabDeck;
     private GameObject Deck;//le deck instancier
     private Transform PosDeck;//coord du deck
-    public int NombreJoueur = 0;
+    [SyncVar] public int NombreJoueur = 0;
     //public List<GameObject> ListeJoueur;
     //private Transform PosJoueur;
 
+    public override void OnStartClient()//sert a la création du deck sur le serveur
+    {
+        ClientScene.RegisterPrefab(PrefabDeck);
+    }
+
+    [Server]
+    public void ServerSpawnDeck(Vector3 pos, Quaternion rot)//sert a la création du deck sur le serveur
+    {
+        Deck = (GameObject)Instantiate(PrefabDeck, pos, rot);
+        NetworkServer.Spawn(Deck);
+    }
     // Use this for initialization
     void Awake()
     {
         //================instanciation deck
-        PrefabDeck = GameObject.FindGameObjectWithTag("TagDeck");
+        PrefabDeck = GameObject.FindGameObjectWithTag("TagDeckNetwork");
         PosDeck = this.transform;
-        Deck = Instantiate(PrefabDeck, new Vector3(0, 0, 0), PosDeck.rotation);
-        
+        ServerSpawnDeck(new Vector3(0, 0, 0), PosDeck.rotation);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        CmdUpdate();
+    }
+
+    [Command]
+    void CmdUpdate()
     {
         string tag = "TagJoueurN";
         //GameObject joueur = GameObject.FindGameObjectWithTag("TagJoueurN1");
@@ -36,14 +52,14 @@ public class ScriptPlateauNetwork : NetworkBehaviour
             {
                 return;
             }
-            GameObject joueurI = GameObject.FindGameObjectWithTag(string.Concat(tag,(1+i).ToString()));
-            if (joueurI.GetComponent<ScriptMainJoueurNetwork>().RecupCarte == true) 
+            GameObject joueurI = GameObject.FindGameObjectWithTag(string.Concat(tag, (1 + i).ToString()));
+            if (joueurI.GetComponent<ScriptMainJoueurNetwork>().RecupCarte == true)
             {
-                joueurI.GetComponent<ScriptMainJoueurNetwork>().CarteARecup = Deck.GetComponent<ScriptDeck>().PrendreCarte();
+                //joueurI.GetComponent<ScriptMainJoueurNetwork>().CarteARecup = Deck.GetComponent<ScriptDeckNetwork>().CmdPrendreCarte();
+                Debug.Log("testTESTtest");
                 joueurI.GetComponent<ScriptMainJoueurNetwork>().RecupCarte = false;
             }
         }
-
     }
 
     private void OnMouseUpAsButton()

@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61ccf74141eb3d4b95012ebee8663af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NombreJoueur: 0
 --- !u!114 &114927013922480388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,7 +132,7 @@ MonoBehaviour:
     i13: 51
     i14: 89
     i15: 170
-  m_ServerOnly: 1
+  m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!212 &212740729778281394
 SpriteRenderer:

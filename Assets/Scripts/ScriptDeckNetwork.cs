@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 public class ScriptDeckNetwork : NetworkBehaviour
 {
     List<GameObject> cartes = new List<GameObject>();
-    private GameObject PrefabCarte;
+    [SyncVar] private GameObject PrefabCarte;
     private ScriptCarte PrefabScriptCarte;
-    public int NbreCartes = 159; //nbres de cartes dans le deck
+    [SyncVar] public int NbreCartes = 159; //nbres de cartes dans le deck
     //public Sprite[] paquet;
     public Sprite SpriteAttaque;//fait perdre 1PV 
     public Sprite SpriteAttaqueFurtive;//La cible ne peut utilsier ses pouvoirs de personnage
@@ -52,8 +52,8 @@ public class ScriptDeckNetwork : NetworkBehaviour
     public Sprite SpriteBouclierSac;//Vous pouvez gardez une carte suplémentaire à la fin du tour
     public Sprite SpriteArmeAttaqueSang;//Si la cible n'esquive pas, récupère 1PV
     SpriteRenderer CarteVisible;
-    private bool Init = true;//si c'est le premier click sur le deck
-    private GameObject TempCarte;//pour replacer la carte en dessous du paquet
+    [SyncVar] private bool Init = true;//si c'est le premier click sur le deck
+    [SyncVar] private GameObject TempCarte;//pour replacer la carte en dessous du paquet
     private Sprite CarteAPrendre;//pour prendre la carte du dessus du paquet
 
     // Use this for initialization
@@ -147,6 +147,7 @@ public class ScriptDeckNetwork : NetworkBehaviour
 
             }
             cartes.Add(Instantiate(PrefabCarte, this.transform.position, this.transform.rotation));
+            NetworkServer.Spawn(cartes[i-1]);
             cartes[i - 1].GetComponent<ScriptCarte>().signe = sgn;
             cartes[i - 1].GetComponent<ScriptCarte>().numero = nb;
         }
@@ -425,8 +426,9 @@ public class ScriptDeckNetwork : NetworkBehaviour
         }
         CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<ScriptCarte>().image;//juste l'affichage
     }*/
-
-    public GameObject PrendreCarte()
+    /*
+    [Command]
+    public GameObject CmdPrendreCarte()
     {
         TempCarte = cartes[NbreCartes - 1];
         cartes.RemoveAt(NbreCartes - 1);
@@ -435,7 +437,7 @@ public class ScriptDeckNetwork : NetworkBehaviour
         //CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<ScriptCarte>().image;//reactu de l'affichage
         return TempCarte;
     }
-
+    */
     public void Randomise()
     {
         for (int i = 0; i < NbreCartes; i++)

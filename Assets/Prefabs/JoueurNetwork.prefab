@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853949078153492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.35, y: -6.09, z: 0}
+  m_LocalPosition: {x: -3.18, y: -6.13, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
     i14: 243
     i15: 215
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114821242641937694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,6 +137,7 @@ MonoBehaviour:
   TailleMainActuel: 0
   RecupCarte: 0
   CarteARecup: {fileID: 0}
+  NumeroDuJoueur: 0
 --- !u!212 &212706022562929178
 SpriteRenderer:
   m_ObjectHideFlags: 1

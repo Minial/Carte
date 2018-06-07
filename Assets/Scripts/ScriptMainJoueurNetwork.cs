@@ -6,12 +6,12 @@ using UnityEngine.Networking;
 public class ScriptMainJoueurNetwork : NetworkBehaviour
 {
     List<GameObject> cartes = new List<GameObject>();
-    public int TailleMainMax = 5;
-    public int TailleMainActuel = 0;
-    public bool RecupCarte = false;// pou
-    public GameObject CarteARecup;
     public static int NbreJoueur=0;
-    public int NumeroDuJoueur = 0;
+    [SyncVar] public int TailleMainMax = 5;
+    [SyncVar] public int TailleMainActuel = 0;
+    [SyncVar] public bool RecupCarte = false;// pou
+    [SyncVar] public GameObject CarteARecup;
+    [SyncVar] public int NumeroDuJoueur = 0;
 
     // Use this for initialization
     void Awake()
@@ -59,6 +59,12 @@ public class ScriptMainJoueurNetwork : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        CmdUpdate();
+    }
+
+    [Command]//donné vont vers server
+    void CmdUpdate()
+    {
         float Cos = 8f * Mathf.Cos(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
         float Sin = 4f * Mathf.Sin(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
         this.transform.position = new Vector3(Cos, Sin, 0);
@@ -82,10 +88,15 @@ public class ScriptMainJoueurNetwork : NetworkBehaviour
             cartes[TailleMainActuel - 1].GetComponent<ScriptCarte>().EnMain = true;
         }
         SelectCarte();
-
     }
 
     private void OnMouseUpAsButton()
+    {
+        CmdOnMouseUpAsButton();
+    }
+
+    [Command]
+    private void CmdOnMouseUpAsButton()
     {
         if (!isLocalPlayer)
         {
@@ -93,13 +104,18 @@ public class ScriptMainJoueurNetwork : NetworkBehaviour
         }
         if (TailleMainActuel < TailleMainMax)
         {
-            Debug.Log("testTESTtest");
             RecupCarte = true;
             TailleMainActuel++;// peut se placer aussi dans lupdate, mais ça ne gène pas pour le moment
         }
     }
 
-    private void SelectCarte()//vas  de pair avec le if(enmain) du scriptcarte pour avoir juste une carte par main zoomé
+    private void SelectCarte()
+    {
+        CmdSelectCarte();
+    }
+
+    [Command]
+    private void CmdSelectCarte()//vas  de pair avec le if(enmain) du scriptcarte pour avoir juste une carte par main zoomé
     {
         if (!isLocalPlayer)
         {

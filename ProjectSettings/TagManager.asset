@@ -17,6 +17,7 @@ TagManager:
   - TagJoueurN7
   - TagJoueurN8
   - TagJoueurN9
+  - TagDeckNetwork
   layers:
   - Default
   - TransparentFX

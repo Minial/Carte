@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 212125387654238058}
   - component: {fileID: 114127934057319926}
   - component: {fileID: 61077372061767036}
+  - component: {fileID: 114259249169067854}
+  - component: {fileID: 114943279495667394}
   m_Layer: 0
   m_Name: Carte
   m_TagString: TagCarte
@@ -84,6 +86,60 @@ MonoBehaviour:
   image: {fileID: 0}
   Face: {fileID: 0}
   EnMain: 0
+  Select: 0
+--- !u!114 &114259249169067854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236791287570330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 101
+    i1: 74
+    i2: 244
+    i3: 180
+    i4: 103
+    i5: 100
+    i6: 93
+    i7: 52
+    i8: 216
+    i9: 207
+    i10: 193
+    i11: 150
+    i12: 38
+    i13: 195
+    i14: 233
+    i15: 228
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114943279495667394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236791287570330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212125387654238058
 SpriteRenderer:
   m_ObjectHideFlags: 1

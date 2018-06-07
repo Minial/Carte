@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114634962855662620}
   m_Layer: 0
   m_Name: DeckNetwork
-  m_TagString: TagDeck
+  m_TagString: TagDeckNetwork
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
     i13: 94
     i14: 54
     i15: 179
-  m_ServerOnly: 1
+  m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114320321440957614
 MonoBehaviour:
