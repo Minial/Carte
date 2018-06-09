@@ -10,8 +10,8 @@ public class Card : NetworkBehaviour
     [SyncVar] public int numero = 0;//            1 -> 13(roi)
     [SyncVar] public string signe = "N/A";//      Carreau / Coeur / Pique / Trèfle
     [SyncVar] public string TypeCarte = "N/A";
-    [SyncVar] public Sprite image;
-    [SyncVar] public SpriteRenderer Face;//la face de la carte
+    public Sprite image;
+    public SpriteRenderer Face;//la face de la carte
     [SyncVar] public bool EnMain = false;
     [SyncVar] public bool Select = false;//si on a cliqué sur la carte
 
@@ -21,19 +21,21 @@ public class Card : NetworkBehaviour
         signe = signe_;
         image = img;
     }
-
-    void Awake()
-    {
-        Face = GetComponent<SpriteRenderer>();
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
+        Face = GetComponent<SpriteRenderer>();
         Face.sprite = image;
     }
 
     private void OnMouseUpAsButton()
+    {
+        CmdClic();
+    }
+
+    [Command]
+    public void CmdClic()
     {
         if (EnMain)
         {

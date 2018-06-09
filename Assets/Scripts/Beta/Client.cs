@@ -8,12 +8,12 @@ public class Client : NetworkBehaviour
     public bool awake = false;
     public bool start = false;
     public static int NbreClient = 0;
+    public Sprite another;
+    public Sprite temp;
     [SyncVar]
     public bool update = false;
     [SyncVar]
     public bool random = false;
-    public Sprite another;
-    public Sprite temp;
 
     private void Awake()
     {

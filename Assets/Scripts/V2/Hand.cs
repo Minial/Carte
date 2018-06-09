@@ -7,9 +7,10 @@ public class Hand : NetworkBehaviour
 {
     List<GameObject> cartes = new List<GameObject>();
     public static int NbreJoueur = 0;
+    public GameObject Deck; 
     [SyncVar] public int TailleMainMax = 5;
-    [SyncVar] public int TailleMainActuel = 0;
-    [SyncVar] public bool RecupCarte = false;// pou
+    [SyncVar] public int TailleMainActuel = 0;//
+    [SyncVar] public bool RecupCarte = false;
     [SyncVar] public GameObject CarteARecup;
     [SyncVar] public int NumeroDuJoueur = 0;
 
@@ -54,18 +55,32 @@ public class Hand : NetworkBehaviour
         {
             this.tag = "TagJoueurN9";
         }
+        Deck = GameObject.FindGameObjectWithTag("TagDeckNetwork");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isServer)
+        {
+            RpcUpdate();
+        }
+    }
+
+    [ClientRpc]
+    private void RpcUpdate()
+    {
         float Cos = 4f * Mathf.Cos(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
         float Sin = 2f * Mathf.Sin(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
         this.transform.position = new Vector3(Cos, Sin, 0);
-        if (CarteARecup != null)//pour récup les cartes
+        if (RecupCarte)//pour le placement après ajout d'une carte
         {
-            cartes.Add(CarteARecup);
-            CarteARecup = null;
+            //Debug.Log("testTESTtest");
+            RecupCarte = false;
+            Deck.GetComponent<Deck>().CmdPrendreCarte();
+            cartes.Add(Deck.GetComponent<Deck>().TempCarte);
+            TailleMainActuel++;// ça gène pas ici :)
             //Vector3 PositionCarte = new Vector3(this.transform.position.x + 1f * TailleMainActuel, this.transform.position.y, this.transform.position.z);
             for (int i = 0; i < TailleMainActuel; i++)//sert a mettre les cartes comme il faut
             {
@@ -73,16 +88,15 @@ public class Hand : NetworkBehaviour
                 PositionCarte = new Vector3(this.transform.position.x + i - 0.5f * TailleMainActuel + 0.5f, this.transform.position.y - 1, this.transform.position.z);
                 cartes[i].transform.position = PositionCarte;//surrement plus simple qui existe mais je connais pas
             }
-            cartes[TailleMainActuel - 1].GetComponent<ScriptCarte>().Face.sprite = cartes[TailleMainActuel - 1].GetComponent<ScriptCarte>().image;//afficher la face de la carte
+            cartes[TailleMainActuel - 1].GetComponent<Card>().Face.sprite = cartes[TailleMainActuel - 1].GetComponent<Card>().image;//afficher la face de la carte
             cartes[TailleMainActuel - 1].GetComponent<SpriteRenderer>().sortingLayerName = "Carte";
-            cartes[TailleMainActuel - 1].GetComponent<ScriptCarte>().EnMain = true;
+            cartes[TailleMainActuel - 1].GetComponent<Card>().EnMain = true;
         }
         SelectCarte();
     }
 
     private void OnMouseUpAsButton()
     {
-        //Debug.Log("testTESTtest");
         if (!isLocalPlayer)
         {
             return;
@@ -96,7 +110,9 @@ public class Hand : NetworkBehaviour
         if (TailleMainActuel < TailleMainMax)
         {
             RecupCarte = true;
-            TailleMainActuel++;// peut se placer aussi dans lupdate, mais ça ne gène pas pour le moment(sauf si bug de com)
+            //Deck.GetComponent<Deck>().CmdPrendreCarte();
+            //cartes.Add(Deck.GetComponent<Deck>().TempCarte);
+            //TailleMainActuel++;// ça gène ici
         }
     }
 
@@ -104,7 +120,7 @@ public class Hand : NetworkBehaviour
     {
         for (int i = 0; i < TailleMainActuel; i++)
         {
-            if (cartes[i].GetComponent<ScriptCarte>().Select == true)
+            if (cartes[i].GetComponent<Card>().Select == true)
             {
                 for (int j = 0; j < i; j++)//les deux for servent a remmetre tte les autres cartes a une taille normal
                 {
@@ -117,7 +133,7 @@ public class Hand : NetworkBehaviour
                         cartes[j].GetComponent<SpriteRenderer>().transform.localScale = new Vector3(1, 1, 1);
                     }
                 }
-                cartes[i].GetComponent<ScriptCarte>().Select = false;
+                cartes[i].GetComponent<Card>().Select = false;
             }
         }
     }

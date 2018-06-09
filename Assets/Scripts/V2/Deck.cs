@@ -8,8 +8,7 @@ public class Deck : NetworkBehaviour
 {
     List<GameObject> cartes = new List<GameObject>();
     private GameObject PrefabCarte;
-    private ScriptCarte PrefabScriptCarte;
-    [SyncVar] public int NbreCartes = 159; //nbres de cartes dans le deck
+    private Card PrefabCard;
     //public Sprite[] paquet;
     public Sprite SpriteAttaque;//fait perdre 1PV 
     public Sprite SpriteAttaqueFurtive;//La cible ne peut utilsier ses pouvoirs de personnage
@@ -52,16 +51,19 @@ public class Deck : NetworkBehaviour
     public Sprite SpriteBouclierSac;//Vous pouvez gardez une carte suplémentaire à la fin du tour
     public Sprite SpriteArmeAttaqueSang;//Si la cible n'esquive pas, récupère 1PV
     SpriteRenderer CarteVisible;
-    [SyncVar] private bool Init = true;//si c'est le premier click sur le deck
-    private GameObject TempCarte;//pour replacer la carte en dessous du paquet
+    public GameObject TempCarte;//pour replacer la carte en dessous du paquet
     private Sprite CarteAPrendre;//pour prendre la carte du dessus du paquet
+    [SyncVar] public int NombreJoueur = 9;
+    [SyncVar] public int NbreCartes = 159; //nbres de cartes dans le deck
+    [SyncVar] private bool Init = true;//si c'est le premier click sur le deck
+    //[SyncVar] public int rand;//pour synchrone le deck
 
     // Use this for initialization
     void Start()
     {
         this.transform.position = new Vector3(0, 0, 0);//parce que sinon il est déplacé
         CarteVisible = GetComponent<SpriteRenderer>();
-        PrefabScriptCarte = GetComponent<ScriptCarte>();
+        PrefabCard = GetComponent<Card>();
         PrefabCarte = GameObject.FindGameObjectWithTag("TagCarte");
         int nb = 0;
         string sgn = "N/A";
@@ -148,9 +150,9 @@ public class Deck : NetworkBehaviour
 
             }
             cartes.Add(Instantiate(PrefabCarte, this.transform.position, this.transform.rotation));
-            NetworkServer.Spawn(cartes[i - 1]);
-            cartes[i - 1].GetComponent<ScriptCarte>().signe = sgn;
-            cartes[i - 1].GetComponent<ScriptCarte>().numero = nb;
+            //NetworkServer.Spawn(cartes[i - 1]);
+            cartes[i - 1].GetComponent<Card>().signe = sgn;
+            cartes[i - 1].GetComponent<Card>().numero = nb;
         }
         Randomise();
 
@@ -159,242 +161,242 @@ public class Deck : NetworkBehaviour
             //30 Cartes
             if (0 < i && i <= 30)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteAttaque;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Attaque";
+                cartes[i - 1].GetComponent<Card>().image = SpriteAttaque;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Attaque";
             }
             //22 Cartes
             if (30 < i && i <= 52)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteEsquive;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Esquive";
+                cartes[i - 1].GetComponent<Card>().image = SpriteEsquive;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Esquive";
             }
             //12 Cartes
             if (52 < i && i <= 64)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteSoin;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Soin";
+                cartes[i - 1].GetComponent<Card>().image = SpriteSoin;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Soin";
             }
             //7 Cartes
             if (64 < i && i <= 71)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteAttaqueFurtive;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "AttaqueFurtive";
+                cartes[i - 1].GetComponent<Card>().image = SpriteAttaqueFurtive;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "AttaqueFurtive";
             }
             //2 Cartes
             if (71 < i && i <= 73)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteParchemin;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Parchemin";
+                cartes[i - 1].GetComponent<Card>().image = SpriteParchemin;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Parchemin";
             }
             //7 cartes
             if (73 < i && i <= 80)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteAttaqueSang;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "AttaqueSang";
+                cartes[i - 1].GetComponent<Card>().image = SpriteAttaqueSang;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "AttaqueSang";
             }
             //4 Cartes
             if (80 < i && i <= 84)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpritePoison;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Poison";
+                cartes[i - 1].GetComponent<Card>().image = SpritePoison;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Poison";
             }
             //5 Cartes
             if (84 < i && i <= 89)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpritePrendre;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Prendre";
+                cartes[i - 1].GetComponent<Card>().image = SpritePrendre;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Prendre";
             }
             //6 Cartes
             if (89 < i && i <= 95)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBrise;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Brise";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBrise;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Brise";
             }
             //2 Cartes
             if (95 < i && i <= 97)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteMagasin;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Magasin";
+                cartes[i - 1].GetComponent<Card>().image = SpriteMagasin;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Magasin";
             }
             //4 Cartes
             if (97 < i && i <= 101)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpritePioche;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Pioche";
+                cartes[i - 1].GetComponent<Card>().image = SpritePioche;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Pioche";
             }
             //3 Cartes
             if (101 < i && i <= 104)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteDuel;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Duel";
+                cartes[i - 1].GetComponent<Card>().image = SpriteDuel;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Duel";
             }
             //3 Cartes
             if (104 < i && i <= 107)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteFlamme;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Flamme";
+                cartes[i - 1].GetComponent<Card>().image = SpriteFlamme;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Flamme";
             }
             //1 Carte
             if (107 < i && i <= 108)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = Sprite1000Fleche;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "1000Fleche";
+                cartes[i - 1].GetComponent<Card>().image = Sprite1000Fleche;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "1000Fleche";
             }
             //2 Cartes
             if (108 < i && i <= 110)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBombe;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Bombe";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBombe;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Bombe";
             }
             //1 Carte
             if (110 < i && i <= 111)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteRepos;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Repos";
+                cartes[i - 1].GetComponent<Card>().image = SpriteRepos;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Repos";
             }
             //6 Cartes
             if (111 < i && i <= 117)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteAntiMagie;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "AntiMagie";
+                cartes[i - 1].GetComponent<Card>().image = SpriteAntiMagie;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "AntiMagie";
             }
             //2 Cartes
             if (117 < i && i <= 119)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteControle;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Controle";
+                cartes[i - 1].GetComponent<Card>().image = SpriteControle;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Controle";
             }
             //3 Cartes
             if (119 < i && i <= 122)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpritePrison;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Prison";
+                cartes[i - 1].GetComponent<Card>().image = SpritePrison;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Prison";
             }
             //2 Cartes
             if (122 < i && i <= 124)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBataille;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Bataille";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBataille;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Bataille";
             }
             //4 Cartes
             if (124 < i && i <= 128)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteAlliee;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Alliee";
+                cartes[i - 1].GetComponent<Card>().image = SpriteAlliee;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Alliee";
             }
             //2 Cartes
             if (128 < i && i <= 130)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteFamine;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Famine";
+                cartes[i - 1].GetComponent<Card>().image = SpriteFamine;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Famine";
             }
             //3 Cartes
             if (130 < i && i <= 133)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteProvocation;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Provocation";
+                cartes[i - 1].GetComponent<Card>().image = SpriteProvocation;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Provocation";
             }
             //3 Cartes
             if (133 < i && i <= 136)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteEchange;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Echange";
+                cartes[i - 1].GetComponent<Card>().image = SpriteEchange;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Echange";
             }
             //2 Cartes
             if (136 < i && i <= 138)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBouclierEsquive;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "BouclierEsquive";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBouclierEsquive;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "BouclierEsquive";
             }
             //3 Cartes
             if (138 < i && i <= 141)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteChevalOffenssif;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ChevalOffenssif";
+                cartes[i - 1].GetComponent<Card>().image = SpriteChevalOffenssif;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ChevalOffenssif";
             }
             //3 Cartes
             if (141 < i && i <= 144)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteChevalDeffenssif;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ChevalDeffenssif";
+                cartes[i - 1].GetComponent<Card>().image = SpriteChevalDeffenssif;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ChevalDeffenssif";
             }
             //2 Cartes
             if (144 < i && i <= 146)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeInfinie;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeInfinie";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeInfinie;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeInfinie";
             }
             //1 Carte
             if (146 < i && i <= 147)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeBriseCarte;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeBriseCarte";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeBriseCarte;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeBriseCarte";
             }
             //1 Carte
             if (147 < i && i <= 148)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeContreBouclier;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeContreBouclier";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeContreBouclier;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeContreBouclier";
             }
             //1 Carte
             if (148 < i && i <= 149)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeContreEsquive;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeContreEsquive";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeContreEsquive;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeContreEsquive";
             }
             //1 Carte
             if (149 < i && i <= 150)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmePrendreCarte;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmePrendreCarte";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmePrendreCarte;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmePrendreCarte";
             }
             //1 Carte
             if (150 < i && i <= 151)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeDegatSiEsquive;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeDegatSiEsquive";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeDegatSiEsquive;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeDegatSiEsquive";
             }
             //1 Carte
             if (151 < i && i <= 152)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeAttaqueZone;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "AttaqueZone";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeAttaqueZone;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "AttaqueZone";
             }
             //1 Carte
             if (152 < i && i <= 153)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeBriseCheval;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeBriseCheval";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeBriseCheval;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeBriseCheval";
             }
             //1 Carte
             if (153 < i && i <= 154)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBouclier2Degats;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "Bouclier2Degats";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBouclier2Degats;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "Bouclier2Degats";
             }
             //1 Carte
             if (154 < i && i <= 155)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBouclierZone;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "BouclierZone";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBouclierZone;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "BouclierZone";
             }
             //1 Carte
             if (155 < i && i <= 156)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmePoison;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmePoison";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmePoison;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmePoison";
             }
             //2 Cartes
             if (156 < i && i <= 158)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteBouclierSac;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "BouclierSac";
+                cartes[i - 1].GetComponent<Card>().image = SpriteBouclierSac;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "BouclierSac";
             }
             //1 Carte
             if (158 < i && i <= 159)
             {
-                cartes[i - 1].GetComponent<ScriptCarte>().image = SpriteArmeAttaqueSang;
-                cartes[i - 1].GetComponent<ScriptCarte>().TypeCarte = "ArmeAttaqueSang";
+                cartes[i - 1].GetComponent<Card>().image = SpriteArmeAttaqueSang;
+                cartes[i - 1].GetComponent<Card>().TypeCarte = "ArmeAttaqueSang";
             }
             cartes[i - 1].GetComponent<SpriteRenderer>().sortingLayerName = "Default";//pour éviter que la carte s'affiche devant le reste
             //cartes[i - 1].transform.localScale=new Vector3(0.5f,0.5f,1)//pour afficher a la bonne taille
@@ -406,46 +408,49 @@ public class Deck : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //CmdPrendreCarte();
     }
-
-    /*void OnMouseUpAsButton()
-    {
-        if (Init == false)
-        {//avec init on affiche juste la première carte
-            TempCarte = cartes[NbreCartes - 1];
-            for (int i = NbreCartes - 1; i > 0; i--)
-            {
-                cartes[i] = cartes[i - 1];
-            }
-            cartes[0] = TempCarte;
-        }
-        else
-        {
-            Init = false;
-            this.transform.localScale = new Vector3(1,1,1);//pour afficher a la bonne taille
-        }
-        CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<ScriptCarte>().image;//juste l'affichage
-    }*/
-    /*
-    [Command]
-    public GameObject CmdPrendreCarte()
+    
+    //[Command]
+    public void CmdPrendreCarte()
     {
         TempCarte = cartes[NbreCartes - 1];
         cartes.RemoveAt(NbreCartes - 1);
         NbreCartes -= 1;
         //this.transform.localScale = new Vector3(1, 1, 1);//pour afficher a la bonne taille
-        //CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<ScriptCarte>().image;//reactu de l'affichage
-        return TempCarte;
+        //CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<Card>().image;//reactu de l'affichage
+        //return TempCarte;
+        /*
+        string tag = "TagJoueurN";
+        string tagc;
+        //GameObject joueur = GameObject.FindGameObjectWithTag("TagJoueurN1");
+        //NombreJoueur = joueur.GetComponents<ScriptMainJoueurNetwork>().NbreJoueur;//mettre un if pour éviter les null
+        //NombreJoueur = 9;//la ligne du dessus marche pas jsp pq
+        for (int i = 0; i < NombreJoueur; i++)
+        {
+            tagc = string.Concat(tag, (1 + i).ToString());
+            //if (ListeJoueur[i].GetComponent<ScriptMainJoueur>().RecupCarte == true)
+            if (GameObject.FindGameObjectWithTag(tagc) != null)
+            {
+                GameObject joueurI = GameObject.FindGameObjectWithTag("TagJoueurN1");
+                if (joueurI.GetComponent<Card>().RecupCarte == true)
+                {
+                    joueurI.GetComponent<Card>().CarteARecup = TempCarte;
+                    Debug.Log("testTESTtest");
+                    joueurI.GetComponent<Card>().RecupCarte = false;
+                }
+            }
+        }problème de détection...
+        */
     }
-    */
+    
     public void Randomise()
     {
         for (int i = 0; i < NbreCartes; i++)
         {
-            int R = Random.Range(0, i + 1);
-            GameObject Temp = cartes[R];
-            cartes[R] = cartes[i];
+            int rand = Random.Range(0, i + 1);
+            GameObject Temp = cartes[rand];
+            cartes[rand] = cartes[i];
             cartes[i] = Temp;
         }
     }

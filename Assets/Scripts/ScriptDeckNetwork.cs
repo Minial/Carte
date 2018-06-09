@@ -144,7 +144,6 @@ public class ScriptDeckNetwork : NetworkBehaviour
                     nb = i - 156;
                     sgn = "Pique";
                 }
-
             }
             cartes.Add(Instantiate(PrefabCarte, this.transform.position, this.transform.rotation));
             NetworkServer.Spawn(cartes[i-1]);
