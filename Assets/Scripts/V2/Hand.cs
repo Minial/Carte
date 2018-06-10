@@ -13,7 +13,8 @@ public class Hand : NetworkBehaviour
     [SyncVar] public bool RecupCarte = false;
     [SyncVar] public GameObject CarteARecup;
     [SyncVar] public int NumeroDuJoueur = 0;
-
+    [SyncVar] public float cos;
+    [SyncVar] public float sin;
     // Use this for initialization
     void Start()
     {
@@ -56,12 +57,14 @@ public class Hand : NetworkBehaviour
             this.tag = "TagJoueurN9";
         }
         Deck = GameObject.FindGameObjectWithTag("TagDeckNetwork");
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        cos = 4f * Mathf.Cos(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);//problème avec le client si mis dans le rpc
+        sin = 2f * Mathf.Sin(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
+        this.transform.position = new Vector3(cos, sin, 0);
         if (isServer)
         {
             RpcUpdate();
@@ -71,9 +74,6 @@ public class Hand : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdate()
     {
-        float Cos = 4f * Mathf.Cos(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
-        float Sin = 2f * Mathf.Sin(NumeroDuJoueur * 2f * Mathf.PI / NbreJoueur);
-        this.transform.position = new Vector3(Cos, Sin, 0);
         if (RecupCarte)//pour le placement après ajout d'une carte
         {
             //Debug.Log("testTESTtest");

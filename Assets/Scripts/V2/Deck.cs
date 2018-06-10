@@ -44,7 +44,7 @@ public class Deck : NetworkBehaviour
     public Sprite SpriteArmePrendreCarte;//Vous pouvez utilisez 2 cartes en main au lieu d'une attaque
     public Sprite SpriteArmeDegatSiEsquive;//Si la cible Esquive, vous pouvez utiliser 2 cartes (main ou equipement pour qu'elle subisse le degat)
     public Sprite SpriteArmeAttaqueZone;//si votre derniere carte en main est une attaque et que vous l'utilisez, elle peut toucher jusqu'à 3 joueurs
-    public Sprite SpriteArmeBriseCheval;//Si vous touchez, vous pouvez defaussez 1 cheval de la cible au lieu d'un degat
+    public Sprite SpriteArmeBriseCheval;//Si vous touchez, vous pouvez defaussez 1 cheval de la cible avec le degat degat
     public Sprite SpriteBouclier2Degats;//Peut encaisser 2 degats
     public Sprite SpriteBouclierZone;//ignore les magie de zones
     public Sprite SpriteArmePoison;//Vos prochaines attaques feront +1 degats en échange d'1 PV jusqu'à la fin du tour
@@ -56,7 +56,8 @@ public class Deck : NetworkBehaviour
     [SyncVar] public int NombreJoueur = 9;
     [SyncVar] public int NbreCartes = 159; //nbres de cartes dans le deck
     [SyncVar] private bool Init = true;//si c'est le premier click sur le deck
-    //[SyncVar] public int rand;//pour synchrone le deck
+    [SyncVar] public int RandSeed = 42;// pour avoir toujours le même mélange de carte entre chaque client
+    [SyncVar] public double testR;
 
     // Use this for initialization
     void Start()
@@ -403,6 +404,8 @@ public class Deck : NetworkBehaviour
         }
         Randomise();//on le met en deux fois pour que les signes ne corresponde pas aux cartes.
         this.transform.localScale = new Vector3(2.02222222f, 1.9841269f, 1);//pour afficher a la bonne taille au départ
+        //RandSeed = Random.Range(0, 1000);
+        Random.InitState(RandSeed);// pour avoir toujours le même mélange de carte entre chaque client
     }
 
     // Update is called once per frame
@@ -449,6 +452,7 @@ public class Deck : NetworkBehaviour
         for (int i = 0; i < NbreCartes; i++)
         {
             int rand = Random.Range(0, i + 1);
+            testR = rand;
             GameObject Temp = cartes[rand];
             cartes[rand] = cartes[i];
             cartes[i] = Temp;
