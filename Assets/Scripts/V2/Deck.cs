@@ -57,7 +57,7 @@ public class Deck : NetworkBehaviour
     [SyncVar] public int NbreCartes = 159; //nbres de cartes dans le deck
     [SyncVar] private bool Init = true;//si c'est le premier click sur le deck
     [SyncVar] public int RandSeed = 42;// pour avoir toujours le même mélange de carte entre chaque client
-    [SyncVar] public double testR;
+    [SyncVar] public int testR;//utiliser pour le random
 
     // Use this for initialization
     void Start()
@@ -420,42 +420,22 @@ public class Deck : NetworkBehaviour
         TempCarte = cartes[NbreCartes - 1];
         cartes.RemoveAt(NbreCartes - 1);
         NbreCartes -= 1;
-        //this.transform.localScale = new Vector3(1, 1, 1);//pour afficher a la bonne taille
-        //CarteVisible.sprite = cartes[NbreCartes - 1].GetComponent<Card>().image;//reactu de l'affichage
-        //return TempCarte;
-        /*
-        string tag = "TagJoueurN";
-        string tagc;
-        //GameObject joueur = GameObject.FindGameObjectWithTag("TagJoueurN1");
-        //NombreJoueur = joueur.GetComponents<ScriptMainJoueurNetwork>().NbreJoueur;//mettre un if pour éviter les null
-        //NombreJoueur = 9;//la ligne du dessus marche pas jsp pq
-        for (int i = 0; i < NombreJoueur; i++)
-        {
-            tagc = string.Concat(tag, (1 + i).ToString());
-            //if (ListeJoueur[i].GetComponent<ScriptMainJoueur>().RecupCarte == true)
-            if (GameObject.FindGameObjectWithTag(tagc) != null)
-            {
-                GameObject joueurI = GameObject.FindGameObjectWithTag("TagJoueurN1");
-                if (joueurI.GetComponent<Card>().RecupCarte == true)
-                {
-                    joueurI.GetComponent<Card>().CarteARecup = TempCarte;
-                    Debug.Log("testTESTtest");
-                    joueurI.GetComponent<Card>().RecupCarte = false;
-                }
-            }
-        }problème de détection...
-        */
     }
     
     public void Randomise()
     {
+        //Debug.Log("testTESTtest");
+        Random.InitState(RandSeed);// pour avoir toujours le même mélange de carte entre chaque client
         for (int i = 0; i < NbreCartes; i++)
         {
-            int rand = Random.Range(0, i + 1);
-            testR = rand;
-            GameObject Temp = cartes[rand];
-            cartes[rand] = cartes[i];
+            //int rand = Random.Range(0, i + 1);
+            //testR = rand;
+            //CmdRand(i);
+            testR = Random.Range(0, i + 1);
+            GameObject Temp = cartes[testR];
+            cartes[testR] = cartes[i];
             cartes[i] = Temp;
         }
     }
+
 }

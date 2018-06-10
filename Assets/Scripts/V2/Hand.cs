@@ -15,6 +15,8 @@ public class Hand : NetworkBehaviour
     [SyncVar] public int NumeroDuJoueur = 0;
     [SyncVar] public float cos;
     [SyncVar] public float sin;
+    [SyncVar] public double timer;
+
     // Use this for initialization
     void Start()
     {
@@ -74,23 +76,27 @@ public class Hand : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdate()
     {
+
         if (RecupCarte)//pour le placement après ajout d'une carte
         {
-            //Debug.Log("testTESTtest");
-            RecupCarte = false;
-            Deck.GetComponent<Deck>().CmdPrendreCarte();
-            cartes.Add(Deck.GetComponent<Deck>().TempCarte);
-            TailleMainActuel++;// ça gène pas ici :)
-            //Vector3 PositionCarte = new Vector3(this.transform.position.x + 1f * TailleMainActuel, this.transform.position.y, this.transform.position.z);
-            for (int i = 0; i < TailleMainActuel; i++)//sert a mettre les cartes comme il faut
+            if (true)
             {
-                Vector3 PositionCarte;
-                PositionCarte = new Vector3(this.transform.position.x + i - 0.5f * TailleMainActuel + 0.5f, this.transform.position.y - 1, this.transform.position.z);
-                cartes[i].transform.position = PositionCarte;//surrement plus simple qui existe mais je connais pas
+                //Debug.Log("testTESTtest");
+                Deck.GetComponent<Deck>().CmdPrendreCarte();
+                cartes.Add(Deck.GetComponent<Deck>().TempCarte);
+                TailleMainActuel++;// ça gène pas ici :)
+                                   //Vector3 PositionCarte = new Vector3(this.transform.position.x + 1f * TailleMainActuel, this.transform.position.y, this.transform.position.z);
+                for (int i = 0; i < TailleMainActuel; i++)//sert a mettre les cartes comme il faut
+                {
+                    Vector3 PositionCarte;
+                    PositionCarte = new Vector3(this.transform.position.x + i - 0.5f * TailleMainActuel + 0.5f, this.transform.position.y - 1, this.transform.position.z);
+                    cartes[i].transform.position = PositionCarte;//surrement plus simple qui existe mais je connais pas
+                }
+                cartes[TailleMainActuel - 1].GetComponent<Card>().Face.sprite = cartes[TailleMainActuel - 1].GetComponent<Card>().image;//afficher la face de la carte
+                cartes[TailleMainActuel - 1].GetComponent<SpriteRenderer>().sortingLayerName = "Carte";
+                cartes[TailleMainActuel - 1].GetComponent<Card>().EnMain = true;
+                RecupCarte = false;
             }
-            cartes[TailleMainActuel - 1].GetComponent<Card>().Face.sprite = cartes[TailleMainActuel - 1].GetComponent<Card>().image;//afficher la face de la carte
-            cartes[TailleMainActuel - 1].GetComponent<SpriteRenderer>().sortingLayerName = "Carte";
-            cartes[TailleMainActuel - 1].GetComponent<Card>().EnMain = true;
         }
         SelectCarte();
     }
